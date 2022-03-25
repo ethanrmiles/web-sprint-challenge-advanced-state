@@ -1,6 +1,27 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import * as actionCreators from '../state/action-creators'
 
-export default function Wheel(props) {
+
+ function Wheel(props) {
+const { 
+  //states: 
+  wheelReducerState,
+  //action creators
+  moveClockwise,
+  moveCounterClockwise
+  } = props
+console.log(props)
+
+const moveClockwiseHandler = () => {
+   moveClockwise()
+}
+
+const moveCounterClockwiseHandler = () => {
+  moveCounterClockwise()
+}
+
+
   return (
     <div id="wrapper">
       <div id="wheel">
@@ -12,9 +33,17 @@ export default function Wheel(props) {
         <div className="cog" style={{ "--i": 5 }}></div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" >Counter clockwise</button>
-        <button id="clockwiseBtn">Clockwise</button>
+        <button id="counterClockwiseBtn" onClick={moveCounterClockwiseHandler} >Counter clockwise</button>
+        <button id="clockwiseBtn" onClick={moveClockwiseHandler} >Clockwise</button>
       </div>
     </div>
   )
 }
+
+const mapState = (state) => {
+  return {
+    wheelReducerState: state.wheelReducerState
+  }
+}
+
+export default connect(mapState, actionCreators)(Wheel)
