@@ -3,9 +3,17 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
 export function Form(props) {
-console.log('from form: ',props)
+console.log('form: ',props)
+const {
+  form,
+  inputChange 
+  } = props
   const onChange = evt => {
-
+    const value = evt.target.value
+    const name = evt.target.id
+    inputChange({name, value})
+    // console.log(evt.target)
+    
   }
 
   const onSubmit = evt => {

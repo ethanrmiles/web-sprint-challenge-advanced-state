@@ -19,7 +19,9 @@ export function setMessage() { }
 
 export function setQuiz() { }
 
-export function inputChange() { }
+export function inputChange({ name, value }) { 
+  return { type: INPUT_CHANGE, payload: { name, value} }
+}
 
 export function resetForm() { }
 
