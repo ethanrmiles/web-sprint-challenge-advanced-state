@@ -6,9 +6,18 @@ const initialWheelState = 0
 function wheelReducerState(state = initialWheelState, action) {
   switch(action.type){
     case MOVE_CLOCKWISE: 
+    if (state < 5){
       return state + 1
+    } else {
+      return 0
+    }
     case MOVE_COUNTERCLOCKWISE:
-      return state - 1
+      if(state === 0){
+        return 5
+      }else {
+        return state - 1
+      }
+      
     default: 
     return state
   }

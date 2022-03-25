@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
 export function Form(props) {
-
+console.log('from form: ',props)
   const onChange = evt => {
 
   }

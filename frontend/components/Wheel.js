@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
 
+
  function Wheel(props) {
 const { 
   //states: 
@@ -11,7 +12,9 @@ const {
   moveClockwise,
   moveCounterClockwise
   } = props
-console.log(props)
+
+
+
 
 const moveClockwiseHandler = () => {
    moveClockwise()
@@ -25,13 +28,14 @@ const moveCounterClockwiseHandler = () => {
   return (
     <div id="wrapper">
       <div id="wheel">
-        <div className="cog active" style={{ "--i": 0 }}>B</div>
-        <div className="cog" style={{ "--i": 1 }}></div>
-        <div className="cog" style={{ "--i": 2 }}></div>
-        <div className="cog" style={{ "--i": 3 }}></div>
-        <div className="cog" style={{ "--i": 4 }}></div>
-        <div className="cog" style={{ "--i": 5 }}></div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
+       <div className={`cog${wheelReducerState === 0 ? ' active' : ''}`} style={{ "--i": 0 }}>{wheelReducerState === 0 ? "B" : ""}</div>
+        <div className={`cog${wheelReducerState === 1 ? ' active' : ''}`} style={{ "--i": 1 }}>{wheelReducerState === 1 ? "B" : ""}</div>
+        <div className={`cog${wheelReducerState === 2 ? ' active' : ''}`} style={{ "--i": 2 }}>{wheelReducerState === 2 ? "B" : ""}</div>
+        <div className={`cog${wheelReducerState === 3 ? ' active' : ''}`} style={{ "--i": 3 }}>{wheelReducerState === 3 ? "B" : ""}</div>
+        <div className={`cog${wheelReducerState === 4 ? ' active' : ''}`} style={{ "--i": 4 }}>{wheelReducerState === 4 ? "B" : ""}</div>
+        <div className={`cog${wheelReducerState === 5 ? ' active' : ''}`} style={{ "--i": 5 }}>{wheelReducerState === 5 ? "B" : ""}</div>
       </div>
+
       <div id="keypad">
         <button id="counterClockwiseBtn" onClick={moveCounterClockwiseHandler} >Counter clockwise</button>
         <button id="clockwiseBtn" onClick={moveClockwiseHandler} >Clockwise</button>
