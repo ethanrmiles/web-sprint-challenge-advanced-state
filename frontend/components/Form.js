@@ -6,18 +6,26 @@ export function Form(props) {
 console.log('form: ',props)
 const {
   form,
-  inputChange 
+  inputChange,
+  postQuiz
   } = props
   const onChange = evt => {
     const value = evt.target.value
     const name = evt.target.id
     inputChange({name, value})
-    // console.log(evt.target)
-    
   }
 
   const onSubmit = evt => {
-
+    evt.preventDefault()
+    const question_text = form.newQuestion
+    
+    const false_answer_text = form.newFalseAnswer
+    
+    const true_answer_text = form.newTrueAnswer
+    
+    postQuiz({ false_answer_text, question_text, true_answer_text })
+    
+    
   }
 
   return (
