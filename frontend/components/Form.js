@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
+import { useEffect } from 'react'
 
 export function Form(props) {
-console.log('form: ',props)
 const {
   form,
   inputChange,
-  postQuiz
+  postQuiz,
+  fetchQuiz
   } = props
+  console.log(form)
+ 
   const onChange = evt => {
     const value = evt.target.value
     const name = evt.target.id
@@ -17,13 +20,10 @@ const {
 
   const onSubmit = evt => {
     evt.preventDefault()
-    const question_text = form.newQuestion
-    
-    const false_answer_text = form.newFalseAnswer
-    
-    const true_answer_text = form.newTrueAnswer
-    
-    postQuiz({ false_answer_text, question_text, true_answer_text })
+    const { newQuestion, newTrueAnswer, newFalseAnswer } = form
+    console.log(newQuestion, newTrueAnswer, newFalseAnswer )
+    // debugger
+    postQuiz(newQuestion, newTrueAnswer, newFalseAnswer)
     
     
   }

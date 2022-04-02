@@ -27,32 +27,43 @@ export function inputChange({ name, value }) {
 export function resetForm() { }
 
 // ❗ Async action creators
-export function fetchQuiz() {
-  return function (dispatch) {
+export const fetchQuiz = () => dispatch => {
+  axios.get('http://localhost:9000/api/quiz/next')
+  .then(res => {
+    debugger
+  })
+
+
+  .catch(err => {
+    debugger
+  })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
   }
-}
+
 export function postAnswer() {
   return function (dispatch) {
+    console.log(props)
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
 }
-export const postQuiz = ({falseAnswer, question, trueAnswer}) => dispatch => {
-  axios.post(' http://localhost:9000/api/quiz/new', {falseAnswer, question, trueAnswer})
-  .then(res => {
-    console.log(res)
-    // dispatch({ type: SET_QUIZ_INTO_STATE, payload: res.data.data })
-  })
-  .catch(err => console.log('error:', err))
-
-    // On successful POST:
-    // - Dispatch the correct message to the the appropriate state
-    // - Dispatch the resetting of the form
+export const postQuiz = (false_answer_text, question_text, true_answer_text) => dispatch => {
+    axios.post(' http://localhost:9000/api/quiz/new', {false_answer_text, question_text, true_answer_text})
+    .then(res => {
+      dispatch({ type: SET_QUIZ_INTO_STATE, payload: res.data })
   
+    })
+    .catch(err => {
+    dispatch({ type: SET_INFO_MESSAGE, payload: err?.response?.data?.message })
+    
+  })
+  
+      // On successful POST:
+      // - Dispatch the correct message to the the appropriate state
+      // - Dispatch the resetting of the form
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

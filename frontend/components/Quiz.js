@@ -1,6 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function Quiz(props) {
+  // const {
+  //   fetchQuiz
+  // } = props
+  // useEffect(() => {
+  //   fetchQuiz()
+  // }, [])
   return (
     <div id="wrapper">
       {
