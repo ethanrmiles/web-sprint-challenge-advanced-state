@@ -16,7 +16,9 @@ export function moveCounterClockwise() {
 
 export function selectAnswer() { }
 
-export function setMessage() { }
+export function setMessage(type) { 
+  
+}
 
 export function setQuiz() { }
 
@@ -30,7 +32,7 @@ export function resetForm() { }
 export const fetchQuiz = () => dispatch => {
   axios.get('http://localhost:9000/api/quiz/next')
   .then(res => {
-    debugger
+    dispatch( { type: SET_QUIZ_INTO_STATE, payload: res.data })
   })
 
 
@@ -52,18 +54,20 @@ export function postAnswer() {
   }
 }
 export const postQuiz = (false_answer_text, question_text, true_answer_text) => dispatch => {
-    axios.post(' http://localhost:9000/api/quiz/new', {false_answer_text, question_text, true_answer_text})
-    .then(res => {
-      dispatch({ type: SET_QUIZ_INTO_STATE, payload: res.data })
-  
-    })
-    .catch(err => {
+    axios.post(' http://localhost:9000/api/quiz/new', {false_answer_text, question_text, true_answer_text})
+  .then(res => {
+    
+  // dispatch( { type: SET_QUIZ_INTO_STATE, payload: res.data })
+  dispatch({ type: SET_INFO_MESSAGE, payload: res.statusText })
+  dispatch({ type: RESET_FORM })
+  }) 
+    .catch(err => {
     dispatch({ type: SET_INFO_MESSAGE, payload: err?.response?.data?.message })
     
   })
   
-      // On successful POST:
-      // - Dispatch the correct message to the the appropriate state
-      // - Dispatch the resetting of the form
+  // On successful POST:
+  // - Dispatch the correct message to the the appropriate state
+  // - Dispatch the resetting of the form
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

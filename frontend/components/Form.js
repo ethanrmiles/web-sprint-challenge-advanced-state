@@ -8,32 +8,35 @@ const {
   form,
   inputChange,
   postQuiz,
-  fetchQuiz
+  setMessage,
   } = props
-  console.log(form)
+
  
   const onChange = evt => {
     const value = evt.target.value
     const name = evt.target.id
     inputChange({name, value})
+    
   }
+
+  
 
   const onSubmit = evt => {
     evt.preventDefault()
     const { newQuestion, newTrueAnswer, newFalseAnswer } = form
-    console.log(newQuestion, newTrueAnswer, newFalseAnswer )
     // debugger
     postQuiz(newQuestion, newTrueAnswer, newFalseAnswer)
-    
-    
+    setMessage()
   }
 
+ 
+
   return (
-    <form id="form" onSubmit={onSubmit}>
+    <form id="form" onSubmit={onSubmit} name="form">
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
+      <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" value={form.newQuestion} />
+      <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" value={form.newTrueAnswer}/>
+      <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer"value={form.newFalseAnswer} />
       <button id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )
