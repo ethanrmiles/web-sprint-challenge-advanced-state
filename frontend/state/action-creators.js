@@ -67,11 +67,13 @@ export const postAnswer =(quiz_id, answer_id) => dispatch =>{
 
 
 export const postQuiz = (question_text, false_answer_text, true_answer_text) => dispatch => {
+  
     axios.post(' http://localhost:9000/api/quiz/new', {question_text, false_answer_text, true_answer_text})
   .then(res => {
     
+    const question = res.data.question
   // dispatch( { type: SET_QUIZ_INTO_STATE, payload: res.data })
-  dispatch({ type: SET_INFO_MESSAGE, payload: res.statusText })
+  dispatch({ type: SET_INFO_MESSAGE, payload: `Congrats: "${question}" is a great question!` })
   dispatch({ type: RESET_FORM })
   }) 
     .catch(err => {
