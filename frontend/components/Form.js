@@ -10,7 +10,7 @@ const {
   postQuiz,
   setMessage,
   } = props
-
+console.log(form)
  
   const onChange = evt => {
     const value = evt.target.value
@@ -29,7 +29,11 @@ const {
     setMessage()
   }
 
- 
+  const{ newQuestion, newTrueAnswer, newFalseAnswer } = form
+ const enabledSubmitBtn = 
+  newQuestion.trim().length > 0 && newTrueAnswer.trim().length > 0 && newFalseAnswer.trim().length > 0
+  
+
 
   return (
     <form id="form" onSubmit={onSubmit} name="form">
@@ -37,7 +41,7 @@ const {
       <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" value={form.newQuestion} />
       <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" value={form.newTrueAnswer}/>
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer"value={form.newFalseAnswer} />
-      <button id="submitNewQuizBtn">Submit new quiz</button>
+      <button id="submitNewQuizBtn" disabled={!enabledSubmitBtn}>Submit new quiz</button>
     </form>
   )
 }
