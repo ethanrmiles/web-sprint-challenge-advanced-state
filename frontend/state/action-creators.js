@@ -14,7 +14,10 @@ export function moveCounterClockwise() {
   return { type: MOVE_COUNTERCLOCKWISE}
  }
 
-export function selectAnswer() { }
+export function selectAnswer(id) {
+  return { type: SET_SELECTED_ANSWER, payload: id }
+
+ }
 
 export function setMessage(type) { 
   
@@ -53,8 +56,8 @@ export function postAnswer() {
     // - Dispatch the fetching of the next quiz
   }
 }
-export const postQuiz = (false_answer_text, question_text, true_answer_text) => dispatch => {
-    axios.post(' http://localhost:9000/api/quiz/new', {false_answer_text, question_text, true_answer_text})
+export const postQuiz = (question_text, false_answer_text, true_answer_text) => dispatch => {
+    axios.post(' http://localhost:9000/api/quiz/new', {question_text, false_answer_text, true_answer_text})
   .then(res => {
     
   // dispatch( { type: SET_QUIZ_INTO_STATE, payload: res.data })

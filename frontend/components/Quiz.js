@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 export  function Quiz(props) {
   const {
     fetchQuiz,
-    quiz
+    quiz,
+    selectAnswer,
+    selectedAnswer
   } = props
   
   
@@ -13,8 +15,11 @@ export  function Quiz(props) {
     fetchQuiz()
   }, [])
 
-
-
+  const getId = (index) =>{
+   const id =   props?.quiz?.answers[index].answer_id
+    selectAnswer(id)
+  }
+  
   return (
     <div id="wrapper">
       {
@@ -24,17 +29,18 @@ export  function Quiz(props) {
             <h2>{props?.quiz?.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
+              <div className={`answer${props?.quiz?.answers[0].answer_id === selectedAnswer ? ' selected' : ''}`}>
               {props?.quiz?.answers[0].text}
-                <button>
-                  SELECTED
+                <button onClick={()=>getId(0)}>
+                  {props?.quiz?.answers[0].answer_id === selectedAnswer ? 'Selected' : 'Select'}
                 </button>
+                
               </div>
 
-              <div className="answer">
+              <div className={`answer${props?.quiz?.answers[1].answer_id === selectedAnswer ? ' selected' : ''}`}>
               {props?.quiz?.answers[1].text}
-                <button>
-                  Select
+                <button onClick={()=>getId(1)}>
+                {props?.quiz?.answers[1].answer_id === selectedAnswer ? 'Selected' : 'Select'}
                 </button>
               </div>
             </div>
