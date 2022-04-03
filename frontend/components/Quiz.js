@@ -19,6 +19,10 @@ export  function Quiz(props) {
    const id =   props?.quiz?.answers[index].answer_id
     selectAnswer(id)
   }
+
+  console.log(props?.quiz)
+
+  const enabled = selectedAnswer
   
   return (
     <div id="wrapper">
@@ -45,7 +49,7 @@ export  function Quiz(props) {
               </div>
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button id="submitAnswerBtn" disabled={!enabled}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
