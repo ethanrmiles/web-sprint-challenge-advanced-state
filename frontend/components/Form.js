@@ -10,7 +10,7 @@ const {
   postQuiz,
   setMessage,
   } = props
-console.log(form)
+
  
   const onChange = evt => {
     const value = evt.target.value
@@ -26,7 +26,6 @@ console.log(form)
     const { newQuestion, newTrueAnswer, newFalseAnswer } = form
     // debugger
     postQuiz(newQuestion, newTrueAnswer, newFalseAnswer)
-    setMessage()
   }
 
   const{ newQuestion, newTrueAnswer, newFalseAnswer } = form

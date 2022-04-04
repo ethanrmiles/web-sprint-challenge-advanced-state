@@ -29,7 +29,9 @@ export function inputChange({ name, value }) {
   return { type: INPUT_CHANGE, payload: { name, value} }
 }
 
-export function resetForm() { }
+export const  resetForm=() => dispatch =>{ 
+    dispatch({ type: RESET_FORM})
+}
 
 // ❗ Async action creators
 export const fetchQuiz = () => dispatch => {
@@ -70,11 +72,8 @@ export const postQuiz = (question_text, false_answer_text, true_answer_text) => 
   
     axios.post(' http://localhost:9000/api/quiz/new', {question_text, false_answer_text, true_answer_text})
   .then(res => {
-    
-    const question = res.data.question
-  // dispatch( { type: SET_QUIZ_INTO_STATE, payload: res.data })
-  dispatch({ type: SET_INFO_MESSAGE, payload: `Congrats: "${question}" is a great question!` })
-  dispatch({ type: RESET_FORM })
+  dispatch({ type: SET_INFO_MESSAGE, payload: `Congrats: "${res.data.question}" is a great question!` })
+  dispatch(resetForm())
   }) 
     .catch(err => {
     dispatch({ type: SET_INFO_MESSAGE, payload: err?.response?.data?.message })
